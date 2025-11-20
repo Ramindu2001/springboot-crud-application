@@ -8,15 +8,15 @@ import java.util.List;
 @Service
 public interface CustomerService {
 
-    public CustomerDto saveCustomer();
+    public CustomerDto saveCustomer(CustomerDto customerDto);
 
-    public CustomerDto deleteCustomer();
+    public CustomerDto deleteCustomer(Integer id);
 
     public List<CustomerDto> getAllCustomers();
 
-    public CustomerDto updateCustomer();
+    public CustomerDto updateCustomer(CustomerDto customerDto);
 
-    public CustomerDto getCustomerById();
+    public CustomerDto getCustomerById(Integer id);
 
-    public CustomerDto getCustomerByEmail();
+    public CustomerDto getCustomerByEmail(String email);
 }

@@ -17,12 +17,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto saveCustomer() {
+    public CustomerDto saveCustomer(CustomerDto customerDto) {
         return null;
     }
 
     @Override
-    public CustomerDto deleteCustomer() {
+    public CustomerDto deleteCustomer(Integer id) {
         return null;
     }
 
@@ -32,17 +32,17 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto updateCustomer() {
+    public CustomerDto updateCustomer(CustomerDto customerDto) {
         return null;
     }
 
     @Override
-    public CustomerDto getCustomerById() {
+    public CustomerDto getCustomerById(Integer id) {
         return null;
     }
 
     @Override
-    public CustomerDto getCustomerByEmail() {
+    public CustomerDto getCustomerByEmail(String email) {
         return null;
     }
 }
