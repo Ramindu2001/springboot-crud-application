@@ -43,6 +43,18 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto updateCustomer(CustomerDto customerDto) {
+        Optional<Customer> byId = customerRepo.findById(customerDto.getId());
+
+        if (byId.isPresent()) {
+            Customer cus = byId.get();
+
+            cus.setName(customerDto.getName());
+            cus.setSalary(customerDto.getSalary());
+            cus.setEmail(customerDto.getEmail());
+
+            Customer update = customerRepo.save(cus);
+            return new CustomerDto(update.getId(), update.getName(), update.getSalary(), update.getEmail());
+        }
         return null;
     }
 
