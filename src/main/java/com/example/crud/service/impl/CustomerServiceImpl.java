@@ -60,6 +60,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto getCustomerById(Integer id) {
+        Optional<Customer> byId = customerRepo.findById(id);
+
+        if (byId.isPresent()) {
+            Customer customer = byId.get();
+            return new CustomerDto(customer.getId(), customer.getName(), customer.getSalary(), customer.getEmail());
+        }
         return null;
     }
 
