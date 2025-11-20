@@ -7,6 +7,7 @@ import com.example.crud.service.CustomerService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -25,6 +26,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto deleteCustomer(Integer id) {
+        Optional<Customer> byId = customerRepo.findById(id);
+
+        if (byId.isPresent()) {
+            customerRepo.deleteById(id);
+            Customer customer = byId.get();
+            return new CustomerDto(customer.getId(), customer.getName(), customer.getSalary(), customer.getEmail());
+        }
         return null;
     }
 

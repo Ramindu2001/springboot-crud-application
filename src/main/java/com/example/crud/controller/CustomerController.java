@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 @RestController
 @RequestMapping("api/v1/customer")
 public class CustomerController {
@@ -23,8 +25,17 @@ public class CustomerController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteCustomer() {
-        // Implementation for deleting a customer
+    public ResponseEntity<Object> deleteCustomer(@PathVariable Integer id){
+        CustomerDto delete = customerService.deleteCustomer(id);
+
+        if(delete != null){
+            return new ResponseEntity<>(delete, HttpStatus.OK);
+        }else{
+            HashMap<String, Object> res = new HashMap<>();
+            res.put("message", "Customer not found");
+
+            return new ResponseEntity<>(res, HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("getAll")
