@@ -1,12 +1,14 @@
 package com.example.crud.controller;
 
 import com.example.crud.dto.CustomerDto;
+import com.example.crud.entity.Customer;
 import com.example.crud.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/customer")
@@ -43,14 +45,23 @@ public class CustomerController {
         // Implementation for retrieving all customers
     }
 
-    @PutMapping("/update")
-    public void updateCustomer() {
-        // Implementation for updating a customer
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable Integer id, @RequestBody CustomerDto customerDto){
+        customerDto.setId(id);
+        CustomerDto update = customerService.updateCustomer(customerDto);
+        if(update != null){
+            return new ResponseEntity<>(update, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/getById/{id}")
-    public void getCustomerById() {
-        // Implementation for retrieving a customer by ID
+    public ResponseEntity<CustomerDto> getCustomerById(@PathVariable Integer id){
+        CustomerDto customerById = customerService.getCustomerById(id);
+        if(customerById != null){
+            return new ResponseEntity<>(customerById, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/getByEmail")
