@@ -1,10 +1,17 @@
 package com.example.crud.controller;
 
+import com.example.crud.service.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/customer")
 public class CustomerController {
+
+    private final CustomerService customerService;
+
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @PostMapping("/save")
     public void saveCustomer() {
