@@ -19,4 +19,10 @@ public class Customer {
     private String name;
     private double salary;
     private String email;
+
+    public Customer(String name, double salary, String email) {
+        this.name = name;
+        this.salary = salary;
+        this.email = email;
+    }
 }

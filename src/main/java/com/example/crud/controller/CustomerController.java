@@ -1,6 +1,9 @@
 package com.example.crud.controller;
 
+import com.example.crud.dto.CustomerDto;
 import com.example.crud.service.CustomerService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,8 +17,9 @@ public class CustomerController {
     }
 
     @PostMapping("/save")
-    public void saveCustomer() {
-        // Implementation for saving a customer
+    public ResponseEntity<CustomerDto> saveCustomer(@RequestBody CustomerDto customerDto) {
+         CustomerDto result =  customerService.saveCustomer(customerDto);
+         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")
