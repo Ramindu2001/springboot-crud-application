@@ -64,8 +64,14 @@ public class CustomerController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/getByEmail")
-    public void getCustomerByEmail() {
-        // Implementation for retrieving a customer by email
+    @GetMapping("/getEmail/{email:.+}")
+    public ResponseEntity<CustomerDto> getCustomerByEmail(@PathVariable String email){
+        CustomerDto customerByEmail = customerService.getCustomerByEmail(email);
+
+        if (customerByEmail != null) {
+            return new ResponseEntity<>(customerByEmail, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -71,6 +71,14 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto getCustomerByEmail(String email) {
+        Optional<Customer> optionalCustomer = customerRepo.findByEmail(email);
+
+        if (optionalCustomer.isPresent()) {
+            Customer customer = optionalCustomer.get();
+
+            return new CustomerDto(customer.getId(), customer.getName(), customer.getSalary(), customer.getEmail());
+        }
+
         return null;
     }
 }
