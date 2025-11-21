@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -41,8 +42,9 @@ public class CustomerController {
     }
 
     @GetMapping("getAll")
-    public void getAllCustomers() {
-        // Implementation for retrieving all customers
+    public ResponseEntity<List<CustomerDto>> getAllCustomers(){
+        List<CustomerDto> allCustomers = customerService.getAllCustomers();
+        return new ResponseEntity<>(allCustomers, HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")

@@ -6,6 +6,7 @@ import com.example.crud.repository.CustomerRepo;
 import com.example.crud.service.CustomerService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerDto> getAllCustomers() {
-        return List.of();
+        List<Customer> customers = customerRepo.findAll();
+        ArrayList<CustomerDto> customerDtos = new ArrayList<>();
+        for (Customer customer : customers) {
+            customerDtos.add(new CustomerDto(customer.getId(), customer.getName(), customer.getSalary(), customer.getEmail()));
+        }
+        return customerDtos;
     }
 
     @Override
